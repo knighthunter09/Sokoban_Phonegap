@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+<title>Sokoban</title>
+<meta name="description">
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile-1.4.2.css" />
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.2.js"></script>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/sokoban.js"></script>
+</head>
+<body style="background-color: black; !important;">
+	<div data-role="page"  data-theme="b">
+
+		<div data-role="header">
+			<h1>Gaming Zone</h1>
+		</div>
+
+		<div id="gamingArea" data-role="main" class="ui-content">
+			<div id="gamingZone" style="width:100%;height:80%;padding-left:30px !important;"></div>
+		</div>
+		<div data-role="footer" style="text-align: center;">
+			<div data-role="controlgroup" data-type="horizontal" style="background-color: yellow !important;">
+				<a href="#" id="UP_KEY" class="ui-btn ui-icon-arrow-u ui-btn-icon-notext">Up</a>
+				<a href="#" id="LEFT_KEY" class="ui-btn ui-icon-arrow-l ui-btn-icon-notext">Left</a> 
+				<a href="#" id="RIGHT_KEY" class="ui-btn ui-icon-arrow-r ui-btn-icon-notext">Right</a>
+				<a href="#" id="DOWN_KEY" class="ui-btn ui-icon-arrow-d ui-btn-icon-notext">Down</a>
+			</div>
+		</div>
+		<div><p>Work in progress...</p></div>
+	</div>
+	<script type="text/javascript">
+		var levels = [{
+		boulders : 10,
+		field : [ "######   ##### ", 
+	          	  "#    #   #   # ", 
+	              "# 0  ##### 0 # ",
+			      "# 0 @     0  # ", 
+			  	  "#  ########0 # ", 
+			   	  "####    ### ###",
+			  	  "        #     #", 
+			  	  "        #0    #", 
+			  	  "        # 0   #",
+			  	  "       ## 0   #", 
+			      "       #*0 0  #", 
+			      "       ########"]
+		}];
+		var gameZone = new SokobanGame(levels, document.getElementById("gamingZone"));
+		
+		$("#UP_KEY").on('click', function(event){
+			event.keyCode = 38;
+			gameZone.keyDown(event);
+		});
+		$("#LEFT_KEY").on('click', function(event){
+			event.keyCode = 37;
+			gameZone.keyDown(event);
+		});
+		$("#RIGHT_KEY").on('click', function(event){
+			event.keyCode = 39;
+			gameZone.keyDown(event);
+		});
+		$("#DOWN_KEY").on('click', function(event){
+			event.keyCode = 40;
+			gameZone.keyDown(event);
+		});
+	</script>
+</body>
+</html>

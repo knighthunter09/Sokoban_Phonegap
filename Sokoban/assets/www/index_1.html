@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    	
+    	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">	
+		<!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
+		
+		<title>appTracker</title>
+		<meta name="description" content="appTracker for Accenture">
+		 <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.2.css" />
+		 		 <link rel="stylesheet" href="css/mobile-app.css" />
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.3.2.js"></script>
+      
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="smsplugin.js"></script>
+        <style type="text/css">
+        	h1{
+        		font-size:15px !important;
+        		color:#ffffff !important;
+        		margin-left:auto !important;
+        		margin-right:auto !important;
+        		font-family: 'Segoe UI' !important;
+        	    font-weight:normal !important;
+        	}
+        </style>
+    </head>
+    
+    <body>
+
+       <!-- Start of Setting page -->
+       <div data-role="page" id="settings" data-theme="d">
+
+			<div data-role="header" style="background:#000000 !important;border-color:#000000 !important;">
+				<h1>Accenture Safe City Mobility App</h1>
+		
+				<div data-role="navbar" data-iconpos="right" >
+					<ul>
+						<li><a href="#settings" data-transition="none" data-icon="gear" class="ui-btn-active ui-state-persist">Configure</a></li>					
+						<li><a href="#startTracking" data-transition="none" data-icon="star">Track</a></li>
+						<li><a href="#submitEvent" data-transition="none" data-icon="plus">Report</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div data-role="content">
+				<div style="font-style:normal !important; font-size:19px;" data-role="fieldcontain">CONFIGURATION SETTINGS</div>										
+				<div style="padding-top:10px;">
+					<label for="connectionStatus_idlbl">Connection Status : </label>
+					<span id="home_network_button">Internet Access Enabled</span>
+				</div>
+				<div class="ui-hide-label"></div>
+				<div style="padding-top:10px;">
+					<label for="device_idlbl">User ID : </label>
+					<input type="text" name="device_id" id="device_id" placeholder="Device ID is set by default to uuid provided by the device" data-theme="c"/>
+				    <a data-role="button" id="settings_saveDeviceID">Save</a>
+				</div>
+
+				<div style="padding-top:10px;">
+					<label for="serverip_lbl">Server : </label>
+					<input type="text" name="ipAddress_WS" id="ipAddress_WS" placeholder="Please set IP address for the desired Web Service" data-theme="c"/>
+					<a data-role="button" id="settings_saveipAddress">Save</a>
+				</div>
+				
+								
+				<p id="SettingsStatus_info"></p>
+			</div>
+	   </div>
+       <!-- End of Setting Page -->
+    			
+		<!-- Start of Tracking page -->
+		<div data-role="page" id="startTracking" data-theme="d">
+
+			<div data-role="header" style="background:#000000 !important;border-color:#000000 !important;">
+				<h1>Accenture Safe City Mobility App</h1>
+		
+				<div data-role="navbar" data-iconpos="right" >
+					<ul>
+						<li><a href="#settings" data-transition="none" data-icon="gear">Configure</a></li>
+						<li><a href="#startTracking" data-transition="none" data-icon="star" class="ui-btn-active ui-state-persist">Track</a></li>
+						<li><a href="#submitEvent" data-transition="none" data-icon="plus">Report</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div data-role="content">
+				<div style="font-style:normal !important; font-size:19px;" data-role="fieldcontain">LOCATION TRACKING</div>	
+				<p id="startTracking_status"> Please start by pressing the Start Tracking button </p>								
+					<div style="padding-top:5px;">
+					<a data-role="button" id="startTracking_start">Start Tracking</a>
+					<a data-role="button" id="startTracking_stop" class="ui-disabled">Stop Tracking</a>
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label"></div>		
+					<div data-role='collapsible' data-mini='true' style="background-color:#D3D3D3;"><h4>Inbox</h4>
+						<ul data-role="listview" id="broadCastMsg" style="margin-left:10px;margin-right:10px;background-color:#DCDCDC;font-size:14px;"></ul>
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label"></div>		
+					<div data-role='collapsible' data-mini='true' style="background-color:#D3D3D3;"><h4>Tracking Log</h4>
+						<ul data-role="listview" id="startTracking_info" style="margin-left:10px;margin-right:10px;background-color:#DCDCDC;font-size:14px;"></ul>
+					</div>
+			</div>
+		</div>
+		<!-- End of Tracking Page -->
+       
+       
+       <!-- Start of Submit Event page -->
+         <div data-role="page" id="submitEvent" data-theme="d">
+
+			<div data-role="header" style="background:#000000 !important;border-color:#000000 !important;">
+				<h1>Accenture Safe City Mobility App</h1>
+		
+				<div data-role="navbar" data-iconpos="right" >
+					<ul>
+						<li><a href="#settings" data-transition="none" data-icon="gear">Configure</a></li>
+						<li><a href="#startTracking" data-transition="none" data-icon="star">Track</a></li>
+						<li><a href="#submitEvent" data-transition="none" data-icon="plus" class="ui-btn-active ui-state-persist">Report</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div data-role="content">	
+				<div data-role="fieldcontain" style="font-style:normal !important; font-size:19px;">SUBMIT GROUND REPORT</div>
+				<div>
+					<a data-role="button" width="50%" data-icon="refresh" data-inline="true" data-mini="true" onclick="resetCaptureForm()" style="float:right;">Reset Form</a>
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="inputTextlbl">Report Description:</label>
+					<textarea name="inputTextArea" id="inputTextArea" maxlength="200" cols="40" rows="8" placeholder="Input text here" data-theme="c"> </textarea>
+					<form>
+						<label for="categoryLb" data-inline="true">Report Category:</label>
+						<select name="category" id="report_category" data-native-menu="false" onchange="updateSelectedValue()">
+        					<option value="Reporting">Reporting</option>
+        					<option value="Screening">Screening</option>
+        					<option value="Incident">Incident</option>
+       				</select>
+					</form>
+				</div>
+
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="imgLbl">Please Select Image from : </label>
+					<a data-role="button" id="getimg_subBtnCamera" onclick="getPhoto(pictureSource.CAMERA);">Capture Image from Camera</a>
+					<a data-role="button" id="getimg_subBtnAlbum" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Add Image from Library</a>
+				</div>
+
+				<p id="subStatus_infoTxt" align="center"> </p>
+				<p id="subStatus_infoIMG" align="center"> </p>
+				<p id="subStatus_DisplayData" align="center"> </p>
+				<p>Image Preview:</p>
+				<p align="center"><img style="display:none;" id="dispIMG" src=""/></p>
+				
+				<a data-role="button" id="submitEvent_subBtn">Submit</a>
+				
+			</div>
+	   </div>
+       <!-- End of Submit Event Page -->
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
